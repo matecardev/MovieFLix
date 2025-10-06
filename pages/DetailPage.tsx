@@ -89,8 +89,9 @@ const DetailPage: React.FC = () => {
             <div className="mt-4">
               <p className="text-text-secondary mb-2">Disponible en:</p>
               <div className="flex items-center space-x-4">
-                 <div className="w-24 h-8 bg-gray-700 rounded flex items-center justify-center text-sm">Prime Video</div>
-                 <div className="w-24 h-8 bg-gray-700 rounded flex items-center justify-center text-sm">HBO Max</div>
+                 {data.platforms.map(platform => (
+                    <div key={platform.name} className="h-8 px-4 bg-gray-700 rounded flex items-center justify-center text-sm">{platform.name}</div>
+                 ))}
               </div>
             </div>
             <div className="mt-6">
