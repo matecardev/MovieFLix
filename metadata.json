@@ -1,0 +1,5 @@
+{
+  "name": "MovieFlix - Catálogo de Películas",
+  "description": "Una interfaz de usuario moderna para explorar un catálogo de películas y series, con páginas de listado y detalles. Creado con React, TypeScript y Tailwind CSS.",
+  "requestFramePermissions": []
+}
