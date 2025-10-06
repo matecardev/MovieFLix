@@ -1,10 +1,10 @@
 
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
-import DetailPage from './pages/DetailPage';
+import Header from './components/Header.tsx';
+import Footer from './components/Footer.tsx';
+import HomePage from './pages/HomePage.tsx';
+import DetailPage from './pages/DetailPage.tsx';
 
 const App: React.FC = () => {
   return (

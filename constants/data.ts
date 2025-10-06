@@ -1,5 +1,5 @@
 
-import type { Movie, DetailData } from '../types';
+import type { Movie, DetailData } from '../types.ts';
 
 export const MOVIES_DATA: Movie[] = [
   { id: 1, title: 'Dr. House', year: 2004, type: 'Serie', posterUrl: 'https://picsum.photos/seed/drhouse/400/600' },
@@ -16,7 +16,7 @@ export const MOVIES_DATA: Movie[] = [
   { id: 12, title: 'Interstellar', year: 2014, type: 'Película', posterUrl: 'https://picsum.photos/seed/interstellar/400/600' },
 ];
 
-export const DETAIL_DATA: DetailData = {
+const DR_HOUSE_DETAIL_DATA: DetailData = {
     id: 1,
     title: 'Dr. House',
     originalTitle: 'House M.D.',
@@ -59,5 +59,27 @@ export const DETAIL_DATA: DetailData = {
         { id: 2, username: 'Maria_G', avatarUrl: 'https://picsum.photos/seed/user2/100', date: 'Hace 1 semana', text: 'Me encanta la dinámica entre House y Wilson. Es el corazón de la serie.' },
     ],
 };
+
+export const ALL_DETAILS_DATA: DetailData[] = [
+  DR_HOUSE_DETAIL_DATA,
+  ...MOVIES_DATA.filter(m => m.id !== 1).map(movie => ({
+    id: movie.id,
+    title: movie.title,
+    originalTitle: movie.title,
+    year: movie.year,
+    seasons: movie.type === 'Serie' ? 1 : 0,
+    rating: 'N/A',
+    imdb: 0,
+    platforms: [],
+    genres: ['Desconocido'],
+    description: `Descripción para ${movie.title} no disponible.`,
+    posterUrl: movie.posterUrl,
+    synopsis: `Sinopsis para ${movie.title} no disponible.`,
+    cast: [],
+    review: { general: 'Reseña no disponible.', keyPoints: [] },
+    technicalDetails: { 'Info': 'Datos técnicos no disponibles.' },
+    comments: [],
+  }))
+];
 
 export const RECOMMENDATIONS_DATA: Movie[] = MOVIES_DATA.slice(2, 6);

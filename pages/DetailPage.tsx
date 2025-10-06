@@ -1,8 +1,9 @@
 
 import React, { useState } from 'react';
-import { DETAIL_DATA, RECOMMENDATIONS_DATA } from '../constants/data';
-import MovieCard from '../components/MovieCard';
-import type { Actor, Comment } from '../types';
+import { useParams } from 'react-router-dom';
+import { ALL_DETAILS_DATA, RECOMMENDATIONS_DATA } from '../constants/data.ts';
+import MovieCard from '../components/MovieCard.tsx';
+import type { Actor, Comment } from '../types.ts';
 
 const StarIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
@@ -11,8 +12,18 @@ const StarIcon = () => (
 );
 
 const DetailPage: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const data = ALL_DETAILS_DATA.find(d => d.id === parseInt(id || '', 10));
   const [activeTab, setActiveTab] = useState('synopsis');
-  const data = DETAIL_DATA;
+
+  if (!data) {
+    return (
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+        <h1 className="text-4xl font-display text-text-primary">404 - Contenido No Encontrado</h1>
+        <p className="mt-4 text-text-secondary">La película o serie que buscas no existe o no tiene una página de detalles.</p>
+      </div>
+    );
+  }
 
   const renderTabs = () => {
     const tabs = [
@@ -76,24 +87,27 @@ const DetailPage: React.FC = () => {
             <h2 className="text-2xl text-text-secondary font-display mt-1">{data.originalTitle}</h2>
             <div className="flex items-center space-x-3 text-text-secondary mt-4">
               <span>{data.year}</span>
-              <span>•</span>
-              <span>{data.seasons} Temporadas</span>
+              {data.seasons > 0 && <><span>•</span><span>{data.seasons} Temporadas</span></>}
               <span>•</span>
               <span className="border border-text-secondary px-2 py-0.5 rounded text-sm">{data.rating}</span>
             </div>
-            <div className="flex items-center space-x-2 mt-4">
-                <span className="flex items-center bg-yellow-500 text-black text-sm font-bold px-3 py-1 rounded">
-                    <StarIcon /> <span className="ml-1">IMDb {data.imdb}</span>
-                </span>
-            </div>
-            <div className="mt-4">
-              <p className="text-text-secondary mb-2">Disponible en:</p>
-              <div className="flex items-center space-x-4">
-                 {data.platforms.map(platform => (
-                    <div key={platform.name} className="h-8 px-4 bg-gray-700 rounded flex items-center justify-center text-sm">{platform.name}</div>
-                 ))}
+            {data.imdb > 0 && (
+              <div className="flex items-center space-x-2 mt-4">
+                  <span className="flex items-center bg-yellow-500 text-black text-sm font-bold px-3 py-1 rounded">
+                      <StarIcon /> <span className="ml-1">IMDb {data.imdb}</span>
+                  </span>
               </div>
-            </div>
+            )}
+            {data.platforms.length > 0 && (
+              <div className="mt-4">
+                <p className="text-text-secondary mb-2">Disponible en:</p>
+                <div className="flex items-center space-x-4">
+                  {data.platforms.map(platform => (
+                      <div key={platform.name} className="h-8 px-4 bg-gray-700 rounded flex items-center justify-center text-sm">{platform.name}</div>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className="mt-6">
                 {data.genres.map(genre => (
                     <span key={genre} className="inline-block border border-accent-primary text-accent-primary text-xs font-semibold mr-2 mb-2 px-2.5 py-1 rounded-full">{genre}</span>
@@ -113,24 +127,30 @@ const DetailPage: React.FC = () => {
               <h3 className="text-2xl font-display text-text-primary mb-4">Sinopsis</h3>
               <p className="text-text-secondary leading-loose mb-8">{data.synopsis}</p>
               <h3 className="text-2xl font-display text-text-primary mb-6">Reparto Principal</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-                {data.cast.map(actor => <ActorCard key={actor.name} actor={actor} />)}
-              </div>
+              {data.cast.length > 0 ? (
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+                  {data.cast.map(actor => <ActorCard key={actor.name} actor={actor} />)}
+                </div>
+              ) : <p className="text-text-secondary">Información de reparto no disponible.</p>}
             </div>
           )}
           {activeTab === 'review' && (
             <div>
               <h3 className="text-2xl font-display text-text-primary mb-4">Reseña General</h3>
               <p className="text-text-secondary leading-loose mb-8">{data.review.general}</p>
-              <h3 className="text-2xl font-display text-text-primary mb-4">Puntos Clave</h3>
-              <ul className="space-y-3">
-                {data.review.keyPoints.map((point, index) => (
-                    <li key={index} className="flex items-start">
-                        <span className="text-accent-primary mr-3 mt-1">★</span>
-                        <span className="text-text-secondary">{point}</span>
-                    </li>
-                ))}
-              </ul>
+              {data.review.keyPoints.length > 0 && (
+                <>
+                  <h3 className="text-2xl font-display text-text-primary mb-4">Puntos Clave</h3>
+                  <ul className="space-y-3">
+                    {data.review.keyPoints.map((point, index) => (
+                        <li key={index} className="flex items-start">
+                            <span className="text-accent-primary mr-3 mt-1">★</span>
+                            <span className="text-text-secondary">{point}</span>
+                        </li>
+                    ))}
+                  </ul>
+                </>
+              )}
             </div>
           )}
           {activeTab === 'details' && (
@@ -167,7 +187,9 @@ const DetailPage: React.FC = () => {
             </form>
         </div>
         <div className="space-y-4">
-            {data.comments.map(comment => <CommentCard key={comment.id} comment={comment}/>)}
+            {data.comments.length > 0 ? (
+              data.comments.map(comment => <CommentCard key={comment.id} comment={comment}/>)
+            ) : <p className="text-text-secondary">No hay comentarios aún. ¡Sé el primero!</p>}
         </div>
       </section>
 

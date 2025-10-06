@@ -1,8 +1,8 @@
 
 import React from 'react';
-import MovieCard from '../components/MovieCard';
-import SearchFilters from '../components/SearchFilters';
-import { MOVIES_DATA } from '../constants/data';
+import MovieCard from '../components/MovieCard.tsx';
+import SearchFilters from '../components/SearchFilters.tsx';
+import { MOVIES_DATA } from '../constants/data.ts';
 
 const HomePage: React.FC = () => {
   return (
