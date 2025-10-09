@@ -1,9 +1,8 @@
-
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ALL_DETAILS_DATA, RECOMMENDATIONS_DATA } from '../constants/data.ts';
-import MovieCard from '../components/MovieCard.tsx';
-import type { Actor, Comment } from '../types.ts';
+import { ALL_DETAILS_DATA, RECOMMENDATIONS_DATA } from '../constants/data';
+import MovieCard from '../components/MovieCard';
+import type { Actor, Comment } from '../types';
 
 const StarIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
@@ -102,7 +101,6 @@ const DetailPage: React.FC = () => {
               <div className="mt-4">
                 <p className="text-text-secondary mb-2">Disponible en:</p>
                 <div className="flex items-center space-x-4">
-                  {/* FIX: Changed div to img to properly display platform logos. */}
                   {data.platforms.map(platform => (
                       <img key={platform.name} src={platform.logoUrl} alt={`${platform.name} logo`} className="h-8 object-contain" title={platform.name} />
                   ))}

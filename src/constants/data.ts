@@ -1,5 +1,4 @@
-
-import type { Movie, DetailData } from '../types.ts';
+import type { Movie, DetailData } from '../types';
 
 export const MOVIES_DATA: Movie[] = [
   { id: 1, title: 'Dr. House', year: 2004, type: 'Serie', posterUrl: 'https://picsum.photos/seed/drhouse/400/600' },
@@ -25,7 +24,6 @@ const DR_HOUSE_DETAIL_DATA: DetailData = {
     rating: '+16',
     imdb: 8.7,
     platforms: [
-        // FIX: Using root-relative paths for logos to ensure they load correctly.
         { name: 'Prime Video', logoUrl: '/prime-video-logo.svg' },
         { name: 'HBO Max', logoUrl: '/hbo-max-logo.svg' },
     ],
