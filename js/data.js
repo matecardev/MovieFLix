@@ -1,6 +1,49 @@
-import type { Movie, DetailData } from '../types';
+/**
+ * @typedef {Object} Movie
+ * @property {number} id
+ * @property {string} title
+ * @property {number} year
+ * @property {'Película' | 'Serie'} type
+ * @property {string} posterUrl
+ */
 
-export const MOVIES_DATA: Movie[] = [
+/**
+ * @typedef {Object} Actor
+ * @property {string} name
+ * @property {string} character
+ * @property {string} imageUrl
+ */
+
+/**
+ * @typedef {Object} Comment
+ * @property {number} id
+ * @property {string} username
+ * @property {string} avatarUrl
+ * @property {string} date
+ * @property {string} text
+ */
+
+/**
+ * @typedef {Object} DetailData
+ * @property {number} id
+ * @property {string} title
+ * @property {string} originalTitle
+ * @property {number} year
+ * @property {number} seasons
+ * @property {string} rating
+ * @property {number} imdb
+ * @property {Array<{name: string, logoUrl: string}>} platforms
+ * @property {string[]} genres
+ * @property {string} description
+ * @property {string} posterUrl
+ * @property {string} synopsis
+ * @property {Actor[]} cast
+ * @property {{general: string, keyPoints: string[]}} review
+ * @property {Object<string, string>} technicalDetails
+ * @property {Comment[]} comments
+ */
+
+export const MOVIES_DATA = [
   { id: 1, title: 'Dr. House', year: 2004, type: 'Serie', posterUrl: 'https://picsum.photos/seed/drhouse/400/600' },
   { id: 2, title: 'Inception', year: 2010, type: 'Película', posterUrl: 'https://picsum.photos/seed/inception/400/600' },
   { id: 3, title: 'Breaking Bad', year: 2008, type: 'Serie', posterUrl: 'https://picsum.photos/seed/breakingbad/400/600' },
@@ -15,7 +58,7 @@ export const MOVIES_DATA: Movie[] = [
   { id: 12, title: 'Interstellar', year: 2014, type: 'Película', posterUrl: 'https://picsum.photos/seed/interstellar/400/600' },
 ];
 
-const DR_HOUSE_DETAIL_DATA: DetailData = {
+const DR_HOUSE_DETAIL_DATA = {
     id: 1,
     title: 'Dr. House',
     originalTitle: 'House M.D.',
@@ -59,7 +102,7 @@ const DR_HOUSE_DETAIL_DATA: DetailData = {
     ],
 };
 
-export const ALL_DETAILS_DATA: DetailData[] = [
+export const ALL_DETAILS_DATA = [
   DR_HOUSE_DETAIL_DATA,
   ...MOVIES_DATA.filter(m => m.id !== 1).map(movie => ({
     id: movie.id,
@@ -81,4 +124,4 @@ export const ALL_DETAILS_DATA: DetailData[] = [
   }))
 ];
 
-export const RECOMMENDATIONS_DATA: Movie[] = MOVIES_DATA.slice(2, 6);
+export const RECOMMENDATIONS_DATA = MOVIES_DATA.slice(2, 6);
