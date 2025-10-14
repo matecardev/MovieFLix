@@ -119,7 +119,7 @@ Este proyecto es de código abierto y está disponible bajo la licencia MIT.
 
 ## 👨‍💻 Desarrollado por
 
-Creado con ❤️ por un desarrollador experto.
+Desarrollado con ❤️ para los amantes del cine.
 
 ---
 
