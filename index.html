@@ -54,6 +54,128 @@
     </div>
     
     <!-- JavaScript modules -->
+  <!-- Templates: moved visual markup here to keep HTML in HTML and JS for logic -->
+  <template id="tpl-header">
+    <header class="bg-background-secondary/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 border-b border-border-color">
+      <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center">
+            <a href="#/" class="text-accent-primary font-display text-2xl font-bold">MovieFlix</a>
+          </div>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-4">
+              <a href="#/" class="text-text-secondary hover:text-accent-primary px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
+              <a href="#" class="text-text-secondary hover:text-accent-primary px-3 py-2 rounded-md text-sm font-medium">Películas</a>
+              <a href="#" class="text-text-secondary hover:text-accent-primary px-3 py-2 rounded-md text-sm font-medium">Series</a>
+              <a href="#" class="text-text-secondary hover:text-accent-primary px-3 py-2 rounded-md text-sm font-medium">Géneros</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+  </template>
+
+  <template id="tpl-footer">
+    <footer class="bg-background-secondary border-t border-border-color mt-12">
+      <div class="container mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-text-secondary">
+        <p data-year>&copy; <span></span> MovieFlix. Todos los derechos reservados.</p>
+        <p class="text-sm mt-1">Desarrollado con pasión por el cine.</p>
+      </div>
+    </footer>
+  </template>
+
+  <template id="tpl-movie-card">
+    <a class="block group" href="#">
+      <div class="bg-background-secondary rounded-lg overflow-hidden border border-border-color transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl hover:shadow-accent-primary/10">
+        <img data-movie-poster src="" alt="" class="w-full h-auto object-cover aspect-[2/3]" />
+        <div class="p-4">
+          <h5 data-movie-title class="font-display text-text-primary text-lg truncate group-hover:text-accent-primary transition-colors"></h5>
+          <p data-movie-meta class="text-text-secondary text-sm mt-1"></p>
+        </div>
+      </div>
+    </a>
+  </template>
+
+  <template id="tpl-tabs">
+    <div class="border-b border-border-color mb-8">
+      <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+        <button data-tab="synopsis" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-accent-primary text-accent-primary">Sinopsis y Reparto</button>
+        <button data-tab="review" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-text-secondary hover:text-text-primary hover:border-gray-500">Análisis y Reseña</button>
+        <button data-tab="details" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-text-secondary hover:text-text-primary hover:border-gray-500">Detalles Técnicos</button>
+      </nav>
+    </div>
+  </template>
+
+  <template id="tpl-search-filters">
+    <section class="py-8">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row gap-4">
+          <div class="relative flex-grow">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <input
+              type="text"
+              placeholder="Buscar películas o series..."
+              class="w-full bg-background-secondary border border-border-color rounded-md py-3 pl-10 pr-4 text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-primary focus:border-transparent transition"
+            />
+          </div>
+          <div class="flex gap-4">
+            <div class="relative w-1/2 md:w-48">
+              <select class="w-full appearance-none bg-background-secondary border border-border-color rounded-md py-3 px-4 text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-primary cursor-pointer">
+                <option>Género</option>
+                <option>Acción</option>
+                <option>Comedia</option>
+                <option>Drama</option>
+                <option>Ciencia Ficción</option>
+              </select>
+              <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+            <div class="relative w-1/2 md:w-48">
+              <select class="w-full appearance-none bg-background-secondary border border-border-color rounded-md py-3 px-4 text-text-primary focus:outline-none focus:ring-2 focus:ring-accent-primary cursor-pointer">
+                <option>Tipo</option>
+                <option>Película</option>
+                <option>Serie</option>
+              </select>
+              <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </template>
+
+  <template id="tpl-actor-card">
+    <div class="text-center">
+      <img data-actor-image src="" alt="" class="w-24 h-24 rounded-full mx-auto object-cover border-2 border-border-color" />
+      <h4 data-actor-name class="mt-2 text-text-primary font-medium"></h4>
+      <p data-actor-character class="text-text-secondary text-sm"></p>
+    </div>
+  </template>
+
+  <template id="tpl-comment-card">
+    <div class="flex items-start space-x-4 p-4 bg-background-secondary rounded-lg border border-border-color">
+      <img class="w-12 h-12 rounded-full object-cover" data-comment-avatar src="" alt="" />
+      <div class="flex-1">
+        <div class="flex items-center justify-between">
+          <span data-comment-username class="font-bold text-text-primary"></span>
+          <span data-comment-date class="text-xs text-text-secondary"></span>
+        </div>
+        <p data-comment-text class="mt-1 text-text-primary"></p>
+      </div>
+    </div>
+  </template>
+
     <script type="module" src="js/data.js"></script>
     <script type="module" src="js/components.js"></script>
     <script type="module" src="js/main.js"></script>
