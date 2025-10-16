@@ -5,10 +5,10 @@ import { renderHeader, renderFooter, renderHomePage, renderDetailPage } from './
  */
 class Router {
     constructor() {
-        this.routes = {
-            '/': renderHomePage,
-            '/detail/:id': this.renderDetailPage.bind(this)
-        };
+            this.routes = {
+                '/': renderHomePage,
+                '/detail/:id': renderDetailPage
+            };
         this.init();
     }
 

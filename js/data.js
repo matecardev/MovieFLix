@@ -67,8 +67,8 @@ const DR_HOUSE_DETAIL_DATA = {
     rating: '+16',
     imdb: 8.7,
     platforms: [
-        { name: 'Prime Video', logoUrl: '/prime-video-logo.svg' },
-        { name: 'HBO Max', logoUrl: '/hbo-max-logo.svg' },
+        { name: 'Prime Video', logoUrl: 'public/prime-video-logo.svg' },
+        { name: 'HBO Max', logoUrl: 'public/hbo-max-logo.svg' },
     ],
     genres: ['Drama', 'Misterio', 'Médico'],
     description: 'Un médico antisocial y adicto a la vicodina lidera un equipo de diagnóstico en el Hospital Universitario Princeton-Plainsboro, resolviendo los casos médicos más complejos.',
